@@ -1,10 +1,11 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
 
-
-
-<div class="container-md p-2 border">
+<div class="container p-3 border">
   <h2>DASHBOARD</h2>
+  <br>
+  {% include "accounts/status.html" %}
+  <br>
   <div class="row align-items-start">
     <div class="col-md-5">
       <h4>Customers:</h4>
@@ -40,11 +41,6 @@
   
   </div>
 </div>
-
-
-
-
-
 
 {% endblock content %}
 
