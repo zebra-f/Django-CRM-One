@@ -1,7 +1,46 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
 
-<h1>DASHBOARD</h1>
+
+
+<div class="container-md p-2 border">
+  <h2>DASHBOARD</h2>
+  <div class="row align-items-start">
+    <div class="col-md-5">
+      <h4>Customers:</h4>
+      <div class="card card-body">
+        <a class="btn btn-light btn-md btn-block text-primary" href="#">Create Customer</a>
+        <table class="table table-md">
+          <tr>
+            <th>Customer</th>  
+            <th>Orders</th>  
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    
+    <div class="col-md-7">
+      <h4>Last 5 Orders:</h4>
+      <div class="card card-body">
+        <a class="btn btn-light btn-md btn-block text-primary" href="#">Create Order</a>
+        <table class="table table-md">
+          <tr>
+            <th>Product</th>  
+            <th>Ordered</th>
+            <th>Status</th>
+            <th>Update</th>   
+            <th>Remove</th>    
+          </tr>
+        </table>
+      </div>
+  
+    </div>
+  
+  
+  </div>
+</div>
+
 
 
 
