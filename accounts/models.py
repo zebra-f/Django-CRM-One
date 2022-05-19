@@ -37,6 +37,9 @@ class Product(models.Model):
     # Many-to-many
     tag = models.ManyToManyField(Tag)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Order(models.Model):
 

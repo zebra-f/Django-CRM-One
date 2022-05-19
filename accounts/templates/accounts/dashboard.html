@@ -4,7 +4,9 @@
 <div class="container p-3 border">
   <h2>DASHBOARD</h2>
   <br>
+
   {% include "accounts/status.html" %}
+  
   <br>
   <div class="row align-items-start">
     <div class="col-md-5">
@@ -15,7 +17,15 @@
           <tr>
             <th>Customer</th>  
             <th>Orders</th>  
+          
           </tr>
+          {% for customer in customers %}
+          <tr>
+            <td>{{ customer.name }}</td>
+            <td>blank</td>
+          </tr>
+          {% endfor %}
+
         </table>
       </div>
     </div>
@@ -33,6 +43,15 @@
             <th>Update</th>   
             <th>Remove</th>    
           </tr>
+          {% for order in orders %}
+          <tr>
+            <td>{{ order.product.name }}</td>
+            <td>blank</td>
+            <td>{{ order.status }}</td>
+            <td>blank</td>
+            <td>blank</td>
+          </tr>
+          {% endfor %}
         </table>
       </div>
   
