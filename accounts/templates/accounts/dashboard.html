@@ -46,10 +46,10 @@
           {% for order in orders %}
           <tr>
             <td>{{ order.product.name }}</td>
-            <td>blank</td>
+            <td>{{ order.date_created }}</td>
             <td>{{ order.status }}</td>
-            <td>blank</td>
-            <td>blank</td>
+            <td><a href="">Update</a></td>
+            <td><a href="">Delete</a></td>
           </tr>
           {% endfor %}
         </table>
