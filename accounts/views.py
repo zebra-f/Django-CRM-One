@@ -5,11 +5,15 @@ from .models import Product, Order, Customer
 # Create your views here.
 
 
+# Dashboard
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
     variables = {
         'orders': orders,
+        'orders_count': orders.count(),
+        'orders_count_pending': orders.filter(status='Pending').count(),
+        'orders_count_delivered': orders.filter(status='Delivered').count(),
         'customers': customers
         }
 
