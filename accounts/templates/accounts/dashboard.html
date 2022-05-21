@@ -9,7 +9,8 @@
   
   <br>
   <div class="row align-items-start">
-    <div class="col-md-5">
+    
+    <div class="col-md-4">
       <h4>Customers:</h4>
       <div class="card card-body">
         <a class="btn btn-light btn-md btn-block text-primary" href="#">Create Customer</a>
@@ -30,8 +31,7 @@
       </div>
     </div>
     
-    
-    <div class="col-md-7">
+    <div class="col-md-8">
       <h4>Last 5 Orders:</h4>
       <div class="card card-body">
         <a class="btn btn-light btn-md btn-block text-primary" href="#">Create Order</a>
@@ -47,7 +47,15 @@
           <tr>
             <td>{{ order.product.name }}</td>
             <td>{{ order.date_created }}</td>
-            <td>{{ order.status }}</td>
+            
+            {% if order.status == 'Delivered' %}
+              <td style="background-color: GreenYellow">{{ order.status }}</td>
+            {% elif order.status == 'Pending' %}
+              <td style="background-color: LightCoral">{{ order.status }}</td>
+            {% else %}
+              <td>{{ order.status }}</td>
+            {% endif %}
+
             <td><a href="">Update</a></td>
             <td><a href="">Delete</a></td>
           </tr>
