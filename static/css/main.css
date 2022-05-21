@@ -1,7 +1,18 @@
+
 #navbar {
     background-color: #e9ecf7;
 }
+
 #navbar-brand {
     padding-left: 0.8rem;
     padding-right: 2rem;
+}
+
+#footer {
+    background-color: #e9ecf7;
+}
+
+#footer-content {
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
 }
