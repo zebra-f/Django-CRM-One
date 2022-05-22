@@ -1,4 +1,5 @@
 
+
 #navbar {
     background-color: #e9ecf7;
 }
@@ -18,5 +19,5 @@
 }
 
 table tr:nth-child(even) {
-    background-color: lightgrey;
+    background-color: #f5dfbb;
 }

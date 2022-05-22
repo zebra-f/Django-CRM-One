@@ -49,9 +49,9 @@
             <td>{{ order.date_created }}</td>
             
             {% if order.status == 'Delivered' %}
-              <td style="background-color: GreenYellow">{{ order.status }}</td>
+              <td style="background-color: rgba(124, 255, 0, 0.7)">{{ order.status }}</td>
             {% elif order.status == 'Pending' %}
-              <td style="background-color: LightCoral">{{ order.status }}</td>
+              <td style="background-color: rgba(255, 255, 63, 0.7)">{{ order.status }}</td>
             {% else %}
               <td>{{ order.status }}</td>
             {% endif %}
