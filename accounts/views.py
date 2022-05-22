@@ -9,30 +9,43 @@ from .models import Product, Order, Customer
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
-    variables = {
+    context = {
         'orders': orders,
         'orders_count': orders.count(),
         'orders_count_pending': orders.filter(status='Pending').count(),
         'orders_count_delivered': orders.filter(status='Delivered').count(),
-        'customers': customers
+        'customers': customers,
         }
 
-    return render(request, 'accounts/dashboard.html', context=variables)
+    return render(request, 'accounts/dashboard.html', context=context)
 
 
 def products(request):
     products = Product.objects.all()
-    variables = {
-        'products': products
+    context = {
+        'products': products,
         }
 
-    return render(request, 'accounts/products.html', context=variables)
+    return render(request, 'accounts/products.html', context=context)
 
 
 def customers(request):
     customers = Customer.objects.all()
-    variables = {
-        'customers': customers
+    context = {
+        'customers': customers,
     }
 
-    return render(request, 'accounts/customers.html', context=variables)
+    return render(request, 'accounts/customers.html', context=context)
+
+
+def customer(request, id):
+    customer = Customer.objects.get(id=id)
+    orders = customer.order_set.all()
+
+    context = {
+        'customer': customer,
+        'orders_count': orders.count(),
+        'orders': orders,
+    }
+
+    return render(request, 'accounts/customer.html', context=context)
