@@ -49,11 +49,19 @@
             <td>{{ order.date_created }}</td>
             
             {% if order.status == 'Delivered' %}
-              <td style="background-color: rgba(124, 255, 0, 0.6)">{{ order.status }}</td>
+              <td>
+                <span class="badge" style="color: black;
+                  background-color: rgba(124, 255, 0, 0.6)">{{ order.status }}</span>
+              </td>
             {% elif order.status == 'Pending' %}
-              <td style="background-color: rgba(255, 255, 63, 0.6)">{{ order.status }}</td>
+              <td>
+                <span class="badge" style="color: black;
+                  background-color: rgba(255, 255, 63, 0.6)">{{ order.status }}</span>
+              </td>
             {% else %}
-              <td>{{ order.status }}</td>
+              <td>
+                <span class="badge">{{ order.status }}</span>
+              </td>
             {% endif %}
 
             <td><a class="btn btn-sm" style=
@@ -66,10 +74,7 @@
           {% endfor %}
         </table>
       </div>
-  
     </div>
-  
-  
   </div>
 </div>
 
