@@ -10,8 +10,18 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-          <a class="nav-link" href="#">Products</a>
+          
+            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" 
+            style="{% if request.resolver_match.url_name == 'home' %}border-bottom: 0.1rem solid black;{% endif %}"
+            aria-current="page" href="{% url 'home' %}">Dashboard</a>
+          
+            <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
+            style="{% if request.resolver_match.url_name == 'products' %}border-bottom: 0.1rem solid black;{% endif %}"
+            aria-current="page" href="{% url 'products' %}">Products</a>
+          
+            <a class="nav-link {% if request.resolver_match.url_name == 'customers' %}active{% endif %}"
+            style="{% if request.resolver_match.url_name == 'customers' %}border-bottom: 0.1rem solid black;{% endif %}"
+            aria-current="page" href="{% url 'customers' %}">Customers</a>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
       <div class="card card-body">
         <h4>Customer:</h4>
         <hr>
-        <a class="btn btn-outline-success btn-md btn-block" href="">Update Customer</a>
+        <a class="btn btn-outline-info btn-md btn-block" href="">Update Customer</a>
         <a class="btn btn-outline-danger btn-md btn-block" href="">Delete Customer</a>
         
       </div>
@@ -67,18 +67,18 @@
             <td>{{ order.date_created }}</td>
             
             {% if order.status == 'Delivered' %}
-            <td>
-              <span class="badge" style="color: black;
-                background-color: rgba(124, 255, 0, 0.6)">{{ order.status }}</span>
-            </td>
+              <td>
+                <h5><span class="badge" style="color: black;
+                  background-color: rgba(124, 255, 0, 0.6)">{{ order.status }}</span></h5>
+              </td>
             {% elif order.status == 'Pending' %}
               <td>
-                <span class="badge" style="color: black;
-                  background-color: rgba(255, 255, 63, 0.6)">{{ order.status }}</span>
+                <h5><span class="badge" style="color: black;
+                  background-color: rgba(255, 255, 63, 0.6)">{{ order.status }}</span></h5>
               </td>
             {% else %}
               <td>
-                <span class="badge">{{ order.status }}</span>
+                <h5><span class="badge">{{ order.status }}</span></h5>
               </td>
             {% endif %}
 

@@ -23,7 +23,8 @@
           {% for customer in customers %}
           <tr>
             <td>{{ customer.name }}</td>
-            <td>blank</td>
+            <td><a class="btn btn-sm bg-info" href="{% url 'customer' customer.id %}">
+              Notifications <span class="badge text-bg-secondary">0</span></a></td>
           </tr>
           {% endfor %}
 
@@ -50,17 +51,17 @@
             
             {% if order.status == 'Delivered' %}
               <td>
-                <span class="badge" style="color: black;
-                  background-color: rgba(124, 255, 0, 0.6)">{{ order.status }}</span>
+                <h5><span class="badge" style="color: black;
+                  background-color: rgba(124, 255, 0, 0.6)">{{ order.status }}</span></h5>
               </td>
             {% elif order.status == 'Pending' %}
               <td>
-                <span class="badge" style="color: black;
-                  background-color: rgba(255, 255, 63, 0.6)">{{ order.status }}</span>
+                <h5><span class="badge" style="color: black;
+                  background-color: rgba(255, 255, 63, 0.6)">{{ order.status }}</span></h5>
               </td>
             {% else %}
               <td>
-                <span class="badge">{{ order.status }}</span>
+                <h5><span class="badge">{{ order.status }}</span></h5>
               </td>
             {% endif %}
 
