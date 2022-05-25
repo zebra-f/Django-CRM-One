@@ -49,3 +49,11 @@ def customer(request, id):
     }
 
     return render(request, 'accounts/customer.html', context=context)
+
+
+# ORDER_FORM.HTML
+def create_order(request):
+    context = {
+        
+    }
+    return render(request, 'accounts/order_form.html', context=context)
