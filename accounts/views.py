@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .models import Product, Order, Customer
-# Create your views here.
+from .forms import OrderForm
 
+# Create your views here.
 
 # Dashboard
 def home(request):
@@ -53,7 +54,16 @@ def customer(request, id):
 
 # ORDER_FORM.HTML
 def create_order(request):
+    form = OrderForm()
+
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
     context = {
-        
-    }
+        'form': form
+    }   
+    
     return render(request, 'accounts/order_form.html', context=context)
