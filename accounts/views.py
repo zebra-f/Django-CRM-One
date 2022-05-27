@@ -58,6 +58,7 @@ def create_order(request):
 
     if request.method == "POST":
         form = OrderForm(request.POST)
+
         if form.is_valid():
             form.save()
             return redirect('/')
@@ -66,4 +67,23 @@ def create_order(request):
         'form': form
     }   
     
+    return render(request, 'accounts/order_form.html', context=context)
+
+
+# ORDER_FORM.HTML
+def update_order(request, id):
+    order = Order.objects.get(id=id)
+    form = OrderForm(instance=order)
+    
+    if request.method == "POST":
+        form = OrderForm(request.POST, instance=order)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {
+        'form': form
+    }
+
     return render(request, 'accounts/order_form.html', context=context)

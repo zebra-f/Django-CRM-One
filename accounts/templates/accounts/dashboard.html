@@ -91,14 +91,16 @@
                   background-color: rgba(255, 255, 63, 0.6)">{{ order.status }}</span></h5>
               </td>
             {% else %}
-              <td>
-                <h5><span class="badge">{{ order.status }}</span></h5>
-              </td>
+            <td>
+              <h5><span class="badge" style="color: black;
+                background-color: rgba(0, 128, 0, 0.6)">{{ order.status }}</span></h5>
+            </td>
             {% endif %}
-
+            {% comment %} UPDATE ORDER {% endcomment %}
             <td><a class="btn btn-sm" style=
               "background-color: rgba(0, 180, 216, 0.6)" 
-              href="">Update</a></td>
+              href="{% url 'update_order' order.id %}">Update</a></td>
+            {% comment %} DELETE ORDER {% endcomment %}
             <td><a class="btn btn-sm" style=
               "background-color: rgba(237, 37, 78, 0.6)" 
               href="">Remove</a></td>
