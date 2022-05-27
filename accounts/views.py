@@ -8,8 +8,19 @@ from .forms import OrderForm
 
 # Dashboard
 def dashboard(request):
+
+    if request.method == "POST":
+        id = request.POST['delete-order'].split('-')[-1]
+        
+        order = Order.objects.get(id=id)
+        order.delete()
+
+        return redirect('/')
+        
+
     orders = Order.objects.all()
     customers = Customer.objects.all()
+    
     context = {
         'orders': orders,
         'orders_count': orders.count(),
@@ -23,6 +34,7 @@ def dashboard(request):
 
 def products(request):
     products = Product.objects.all()
+    
     context = {
         'products': products,
         }
