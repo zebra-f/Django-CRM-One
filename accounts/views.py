@@ -7,7 +7,7 @@ from .forms import OrderForm
 # Create your views here.
 
 # Dashboard
-def home(request):
+def dashboard(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
     context = {

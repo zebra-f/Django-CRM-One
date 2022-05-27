@@ -11,9 +11,9 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           
-            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" 
-            style="{% if request.resolver_match.url_name == 'home' %}border-bottom: 0.1rem solid black;{% endif %}"
-            aria-current="page" href="{% url 'home' %}">Dashboard</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" 
+            style="{% if request.resolver_match.url_name == 'dashboard' %}border-bottom: 0.1rem solid black;{% endif %}"
+            aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
           
             <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
             style="{% if request.resolver_match.url_name == 'products' %}border-bottom: 0.1rem solid black;{% endif %}"

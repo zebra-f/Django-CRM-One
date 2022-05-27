@@ -101,9 +101,22 @@
               "background-color: rgba(0, 180, 216, 0.6)" 
               href="{% url 'update_order' order.id %}">Update</a></td>
             {% comment %} DELETE ORDER {% endcomment %}
-            <td><a class="btn btn-sm" style=
+            <td>
+              <button class="btn btn-sm btn-danger" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#collapseDashboardRemove{{ order.id }}" 
+              aria-expanded="false" aria-controls="collapseExample">
+                Delete
+              </button>
+              <div class="collapse" id="collapseDashboardRemove{{ order.id }}">
+                <div class="card card-body">
+                  <div>Yes</div>
+                  <div>No</div>
+                </div>
+              </div>
+            </td>
+            {% comment %} <td><a class="btn btn-sm" style=
               "background-color: rgba(237, 37, 78, 0.6)" 
-              href="">Remove</a></td>
+              href="">Remove</a></td> {% endcomment %}
           </tr>
           {% endfor %}
         </table>
