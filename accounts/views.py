@@ -10,9 +10,8 @@ from .forms import OrderForm
 def dashboard(request):
 
     if request.method == "POST":
-        id = request.POST['delete-order'].split('-')[-1]
-        
-        order = Order.objects.get(id=id)
+        order_id = request.POST['delete-order'].split('-')[-1]
+        order = Order.objects.get(id=int(order_id))
         order.delete()
 
         return redirect('/')
@@ -52,6 +51,14 @@ def customers(request):
 
 
 def customer(request, id):
+    
+    if request.method == "POST":
+        order_id = request.POST['delete-order'].split('-')[-1]
+        order = Order.objects.get(id=int(order_id))
+        order.delete()
+        
+        return redirect(f'/customer/{id}')
+    
     customer = Customer.objects.get(id=id)
     orders = customer.order_set.all()
 
@@ -69,6 +76,7 @@ def create_order(request):
     form = OrderForm()
 
     if request.method == "POST":
+
         form = OrderForm(request.POST)
 
         if form.is_valid():
@@ -84,8 +92,6 @@ def create_order(request):
 
 # ORDER_FORM.HTML
 def update_order(request, id):
-    order = Order.objects.get(id=id)
-    form = OrderForm(instance=order)
     
     if request.method == "POST":
         form = OrderForm(request.POST, instance=order)
@@ -94,6 +100,9 @@ def update_order(request, id):
             form.save()
             return redirect('/')
 
+    order = Order.objects.get(id=id)
+    form = OrderForm(instance=order)
+    
     context = {
         'form': form
     }
