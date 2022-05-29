@@ -61,7 +61,6 @@ def customer(request, id):
     
     customer = Customer.objects.get(id=id)
     orders = customer.order_set.all()
-
     context = {
         'customer': customer,
         'orders_count': orders.count(),
@@ -73,16 +72,14 @@ def customer(request, id):
 
 # ORDER_FORM.HTML
 def create_order(request):
-    form = OrderForm()
-
     if request.method == "POST":
-
         form = OrderForm(request.POST)
 
         if form.is_valid():
             form.save()
             return redirect('/')
 
+    form = OrderForm()
     context = {
         'form': form
     }   
@@ -90,21 +87,46 @@ def create_order(request):
     return render(request, 'accounts/order_form.html', context=context)
 
 
-# ORDER_FORM.HTML
-def update_order(request, id):
+def create_order_p(request, id):
+    ''' id: cusotomer id
+    '''
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect(f'/customer/{id}')
     
+    customer = Customer.objects.get(id=id)
+    form = OrderForm(initial={
+            'customer': customer,
+        }) 
+    context = {
+        'form': form,
+        'mutiple_forms': True, 
+    }
+    
+    return render(request, 'accounts/order_form.html', context=context)
+
+
+# ORDER_FORM.HTML
+def update_order_p(request, id):
+    ''' id: order id
+    '''
+    order = Order.objects.get(id=id)
+
     if request.method == "POST":
         form = OrderForm(request.POST, instance=order)
 
         if form.is_valid():
             form.save()
             return redirect('/')
-
-    order = Order.objects.get(id=id)
-    form = OrderForm(instance=order)
     
+    form = OrderForm(instance=order)
     context = {
         'form': form
     }
 
     return render(request, 'accounts/order_form.html', context=context)
+
+

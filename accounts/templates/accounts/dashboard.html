@@ -14,7 +14,7 @@
       <h4>Customers:</h4>
       <div class="card card-body">
         
-        <a class="btn btn-outline-primary" role="button" href="#">Create Customer</a>
+        <a class="btn btn-sm btn-outline-primary" role="button" href="#">Create Customer</a>
         
         <table class="table table-md">
           <tr>
@@ -41,13 +41,13 @@
         <div class="row">
           <div class="col-md-6">
             <div class="d-grid gap-2 col-12 mx-auto">
-              <a class="btn btn-outline-primary" role="button"
+              <a class="btn btn-sm btn-outline-primary" role="button"
               href="{% url 'create_order' %}">Create Order</a>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="dropdown">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 Filter by
               </a>
             
@@ -58,9 +58,6 @@
                 <li><a class="dropdown-item" href="#">Z-A</a></li>
               </ul>
             </div>
-          </div>
-          <div class="col-md-3">
-            <button class="btn btn-outline-primary" role="button" href="#">Refresh</button>
           </div>
           
         </div>
@@ -100,7 +97,7 @@
             <td>
               <a class="btn btn-sm" style=
               "background-color: rgba(0, 180, 216, 0.6)" 
-              href="{% url 'update_order' order.id %}">Update</a>
+              href="{% url 'update_order_p' order.id %}">Update</a>
             </td>
             {% comment %} DELETE ORDER {% endcomment %}
             <td>

@@ -5,9 +5,15 @@
       
       {% csrf_token %}
       {{ form }}
-      
+      {% if mutiple_forms %}
+        <hr>
+        {{ form }}
+        <hr>
+      {% endif %}
+
       <input type="submit" name="Submit">
     </form>
   </div>
+
 {% endblock content %}
 
