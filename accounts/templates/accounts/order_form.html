@@ -5,11 +5,11 @@
       
       {% csrf_token %}
       {{ form }}
-      {% if mutiple_forms %}
+      {% comment %} {% if mutiple_forms %}
         <hr>
         {{ form }}
         <hr>
-      {% endif %}
+      {% endif %} {% endcomment %}
 
       <input type="submit" name="Submit">
     </form>
