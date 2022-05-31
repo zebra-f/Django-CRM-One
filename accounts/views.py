@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 from .models import Product, Order, Customer
 from .forms import OrderForm
+from .filters import OrderFilter
 
 # Create your views here.
 
@@ -61,10 +62,20 @@ def customer(request, id):
     
     customer = Customer.objects.get(id=id)
     orders = customer.order_set.all()
+    
+    # if else not necessary
+    if len(request.GET) > 0:
+        filter = OrderFilter(request.GET, queryset=orders)
+        # .qs QuerySet
+        orders = filter.qs
+    else:
+        filter = OrderFilter()
+    
     context = {
         'customer': customer,
         'orders_count': orders.count(),
         'orders': orders,
+        'filter': filter,
     }
 
     return render(request, 'accounts/customer.html', context=context)
@@ -76,6 +87,7 @@ def create_order(request):
         form = OrderForm(request.POST)
 
         if form.is_valid():
+            # print(form.cleaned_data)
             form.save()
             return redirect('/')
 

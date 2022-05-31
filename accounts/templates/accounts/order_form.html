@@ -4,14 +4,14 @@
     <form action="" method="POST">
       
       {% csrf_token %}
-      {{ form }}
+      {{ form.as_p }}
       {% comment %} {% if mutiple_forms %}
         <hr>
         {{ form }}
         <hr>
       {% endif %} {% endcomment %}
 
-      <input type="submit" name="Submit">
+      <input type="submit" vale="OK" name="Submit">
     </form>
   </div>
 
