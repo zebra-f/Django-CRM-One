@@ -13,4 +13,8 @@ urlpatterns = [
     path('create_order/', views.create_order, name='create_order'),
     path('create_order/<int:id>/', views.create_order_p, name='create_order_p'),
     path('update_order/<int:id>/', views.update_order_p, name='update_order_p'),
+
+    # LOGIN/REGISTER
+    path('register/', views.register_user, name='register_user'),
+    path('login/', views.login_user, name='login_user')
 ]
