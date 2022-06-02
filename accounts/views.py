@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import Product, Order, Customer
 from .forms import OrderForm
@@ -141,4 +142,14 @@ def update_order_p(request, id):
 
     return render(request, 'accounts/order_form.html', context=context)
 
+
+def register_user(request):
+
+    form = UserCreationForm
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'accounts/register_form.html', context=context)
 
