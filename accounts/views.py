@@ -156,5 +156,11 @@ def register_user(request):
 
 def login_user(request):
 
-    return render(request, 'accounts/login_form.html')
+    
+
+    context = {
+        'form': 'placeholder'
+    }
+
+    return render(request, 'accounts/login_form.html', context=context)
 

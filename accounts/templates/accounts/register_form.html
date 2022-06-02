@@ -1,8 +1,14 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
-  {% csrf_token %}
-  {{ form.as_p }}
+  <div class="container">
+    <form action="" method="POST">
+          
+      {% csrf_token %}
+      {{ form.as_p }}
 
+      <input type="submit" vale="OK" name="Submit">
+    </form>
+  </div>
 {% endblock content %}
 
 
