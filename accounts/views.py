@@ -143,10 +143,20 @@ def update_order_p(request, id):
     return render(request, 'accounts/order_form.html', context=context)
 
 
+# REGISTER/LOGIN
 def register_user(request):
 
+    if request.method == "POST":
+        print("I'm here!")
+        form = UserCreationForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            redirect('/')
+        else:
+            print(form.error_messages)
+    
     form = UserCreationForm
-
     context = {
         'form': form,
     }
