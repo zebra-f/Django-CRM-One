@@ -2,6 +2,14 @@
 {% block content %}
 
 <div class="container">
+  {% if messages %}
+    {% for message in messages  %}
+      <p>{{ message }}</p>
+      {% comment %} <p>{{ message.tags }}</p> {% endcomment %}
+    {% endfor %}
+  {% endif %}
+  
+  
   <form action="" method="POST">
         
     {% csrf_token %}

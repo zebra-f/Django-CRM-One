@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 # from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 
 from .models import Product, Order, Customer
 from .forms import OrderForm, RegisterUserForm
@@ -156,6 +158,10 @@ def register_user(request):
         
         if form.is_valid():
             form.save()
+            
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account {username} was successfully createad.')
+
             return redirect('/login')
     
     context = {
