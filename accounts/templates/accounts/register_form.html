@@ -1,13 +1,29 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
   <div class="container">
+    
     <form action="" method="POST">
           
       {% csrf_token %}
-      {{ form.as_p }}
+      {% for field in form %}
+        
+        {{ field.label }}
+        {{ field }}
 
-      <input type="submit" vale="OK" name="Submit">
+        <br>
+      
+      {% endfor %}
+      
+
+      {% comment %} {{ form.as_p }} {% endcomment %}
+
+      <input type="submit" name="Submit" value="Register">
     </form>
+    
+    {{ form.errors }}
+    
+    <p>Already have an account? <a href="{% url 'login_user' %}">Log in.</a></p>
+
   </div>
 {% endblock content %}
 

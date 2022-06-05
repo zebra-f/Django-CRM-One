@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 
 from .models import Product, Order, Customer
-from .forms import OrderForm
+from .forms import OrderForm, RegisterUserForm
 from .filters import OrderFilter
 
 # Create your views here.
@@ -84,6 +84,9 @@ def customer(request, id):
 
 # ORDER_FORM.HTML
 def create_order(request):
+    
+    form = OrderForm()
+    
     if request.method == "POST":
         form = OrderForm(request.POST)
 
@@ -92,7 +95,6 @@ def create_order(request):
             form.save()
             return redirect('/')
 
-    form = OrderForm()
     context = {
         'form': form
     }   
@@ -103,6 +105,10 @@ def create_order(request):
 def create_order_p(request, id):
     ''' id: cusotomer id
     '''
+    form = OrderForm(initial={
+            'customer': customer,
+        })
+    
     if request.method == "POST":
         form = OrderForm(request.POST)
         
@@ -111,9 +117,6 @@ def create_order_p(request, id):
             return redirect(f'/customer/{id}')
     
     customer = Customer.objects.get(id=id)
-    form = OrderForm(initial={
-            'customer': customer,
-        }) 
     context = {
         'form': form,
         'mutiple_forms': True, 
@@ -127,6 +130,7 @@ def update_order_p(request, id):
     ''' id: order id
     '''
     order = Order.objects.get(id=id)
+    form = OrderForm(instance=order)
 
     if request.method == "POST":
         form = OrderForm(request.POST, instance=order)
@@ -134,8 +138,7 @@ def update_order_p(request, id):
         if form.is_valid():
             form.save()
             return redirect('/')
-    
-    form = OrderForm(instance=order)
+
     context = {
         'form': form
     }
@@ -146,17 +149,15 @@ def update_order_p(request, id):
 # REGISTER/LOGIN
 def register_user(request):
 
+    form = RegisterUserForm
+    
     if request.method == "POST":
-        print("I'm here!")
-        form = UserCreationForm(request.POST)
+        form = RegisterUserForm(request.POST)
         
         if form.is_valid():
             form.save()
-            redirect('/')
-        else:
-            print(form.error_messages)
+            return redirect('/login')
     
-    form = UserCreationForm
     context = {
         'form': form,
     }
