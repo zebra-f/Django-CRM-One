@@ -1,25 +1,27 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
 
-<div class="container">
-  {% if messages %}
-    {% for message in messages  %}
-      <p>{{ message }}</p>
-      {% comment %} <p>{{ message.tags }}</p> {% endcomment %}
-    {% endfor %}
-  {% endif %}
-  
-  
-  <form action="" method="POST">
-        
-    {% csrf_token %}
-    {{ form.as_p }}
+  <div class="container">
+    {% if messages %}
+      {% for message in messages  %}
+        <p>{{ message }}</p>
+        {% comment %} <p>{{ message.tags }}</p> {% endcomment %}
+      {% endfor %}
+    {% endif %}
+    
+    <form action="" method="POST">  
+      {% csrf_token %}
 
-    <input type="submit" name="Submit" value="Login">
-  </form>
+      {{ form.as_p }}
 
-  <p>Don't have an account? <a href="{% url 'register_user' %}">Register.</a></p>
-</div>
+      <input type="submit" name="Submit" value="Login">
+    </form>
+
+    {% comment %} {{ form.errors }} {% endcomment %}
+
+    <p>Don't have an account? <a href="{% url 'register_user' %}">Register.</a></p>
+  
+  </div>
 
 {% endblock content %}
   

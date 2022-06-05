@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
 from .models import Product, Order, Customer
-from .forms import OrderForm, RegisterUserForm
+from .forms import OrderForm, RegisterUserForm, LoginUserForm
 from .filters import OrderFilter
 
 # Create your views here.
@@ -172,11 +172,27 @@ def register_user(request):
 
 
 def login_user(request):
+    form = LoginUserForm
 
-    
+    if request.method == "POST":
+        form = LoginUserForm(data=request.POST)
+        
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+
+            if user:
+                login(request, user)
+                return redirect('/')
+            else:
+                pass
+        
+        else:
+            print(form.errors)
 
     context = {
-        'form': 'placeholder'
+        'form': form
     }
 
     return render(request, 'accounts/login_form.html', context=context)
