@@ -178,6 +178,7 @@ def login_user(request):
         form = LoginUserForm(data=request.POST)
         
         if form.is_valid():
+            form.clean()
             # username = request.POST['username']
             # password = request.POST['password']
             # user = authenticate(request, username=username, password=password)
