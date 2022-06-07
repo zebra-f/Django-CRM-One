@@ -178,18 +178,17 @@ def login_user(request):
         form = LoginUserForm(data=request.POST)
         
         if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(request, username=username, password=password)
+            # username = request.POST['username']
+            # password = request.POST['password']
+            # user = authenticate(request, username=username, password=password)
+            # login(request, user)
 
-            if user:
-                login(request, user)
-                return redirect('/')
-            else:
-                pass
-        
+            login(request, form.user_cache)
+            return redirect('/')
+
         else:
-            print(form.errors)
+            pass
+            # print(form.errors)
 
     context = {
         'form': form
