@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from .models import Product, Order, Customer
 from .forms import OrderForm, RegisterUserForm, LoginUserForm
@@ -10,7 +11,13 @@ from .filters import OrderFilter
 
 # Create your views here.
 
+def home(request):
+
+    return render(request, 'accounts/home.html')
+
+
 # Dashboard
+@login_required(login_url='login_user')
 def dashboard(request):
 
     if request.method == "POST":
@@ -18,7 +25,7 @@ def dashboard(request):
         order = Order.objects.get(id=int(order_id))
         order.delete()
 
-        return redirect('/')
+        return redirect('dashboard')
         
 
     orders = Order.objects.all()
@@ -35,6 +42,7 @@ def dashboard(request):
     return render(request, 'accounts/dashboard.html', context=context)
 
 
+@login_required(login_url='login_user')
 def products(request):
     products = Product.objects.all()
     
@@ -45,6 +53,7 @@ def products(request):
     return render(request, 'accounts/products.html', context=context)
 
 
+@login_required(login_url='login_user')
 def customers(request):
     customers = Customer.objects.all()
     context = {
@@ -54,6 +63,7 @@ def customers(request):
     return render(request, 'accounts/customers.html', context=context)
 
 
+@login_required(login_url='login_user')
 def customer(request, id):
     
     if request.method == "POST":
@@ -85,6 +95,7 @@ def customer(request, id):
 
 
 # ORDER_FORM.HTML
+@login_required(login_url='login_user')
 def create_order(request):
     
     form = OrderForm()
@@ -95,7 +106,7 @@ def create_order(request):
         if form.is_valid():
             # print(form.cleaned_data)
             form.save()
-            return redirect('/')
+            return redirect('dashboard')
 
     context = {
         'form': form
@@ -104,9 +115,11 @@ def create_order(request):
     return render(request, 'accounts/order_form.html', context=context)
 
 
+@login_required(login_url='login_user')
 def create_order_p(request, id):
     ''' id: cusotomer id
     '''
+    customer = Customer.objects.get(id=id)
     form = OrderForm(initial={
             'customer': customer,
         })
@@ -118,7 +131,6 @@ def create_order_p(request, id):
             form.save()
             return redirect(f'/customer/{id}')
     
-    customer = Customer.objects.get(id=id)
     context = {
         'form': form,
         'mutiple_forms': True, 
@@ -128,6 +140,7 @@ def create_order_p(request, id):
 
 
 # ORDER_FORM.HTML
+@login_required(login_url='login_user')
 def update_order_p(request, id):
     ''' id: order id
     '''
@@ -139,7 +152,7 @@ def update_order_p(request, id):
 
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('dashboard')
 
     context = {
         'form': form
@@ -162,7 +175,7 @@ def register_user(request):
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account {username} was successfully createad.')
 
-            return redirect('/login')
+            return redirect('login_user')
     
     context = {
         'form': form,
@@ -185,7 +198,8 @@ def login_user(request):
             # login(request, user)
 
             login(request, form.user_cache)
-            return redirect('/')
+            return redirect('dashboard')
+            
 
         else:
             pass
@@ -196,4 +210,11 @@ def login_user(request):
     }
 
     return render(request, 'accounts/login_form.html', context=context)
+
+
+def logout_user(request):
+
+    logout(request)
+
+    return redirect('home')
 

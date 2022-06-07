@@ -3,39 +3,54 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid" id="navbar">
+      
       <img src="{% static "images/navbar-logo.png" %}" alt="Logo" width="60" height="60">
-      <a class="navbar-brand" href="{% url 'dashboard' %}" id="navbar-brand">CRM</a>
+      <a class="navbar-brand" href="{% url 'home' %}" id="navbar-brand">CRM</a>
+      
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" 
-            style="{% if request.resolver_match.url_name == 'dashboard' %}border-bottom: 0.1rem solid black;{% endif %}"
-            aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
-            style="{% if request.resolver_match.url_name == 'products' %}border-bottom: 0.1rem solid black;{% endif %}"
-            aria-current="page" href="{% url 'products' %}">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'customers' %}active{% endif %}"
-            style="{% if request.resolver_match.url_name == 'customers' %}border-bottom: 0.1rem solid black;{% endif %}"
-            aria-current="page" href="{% url 'customers' %}">Customers</a>
-          </li>
-        </ul>
-        {% comment %} Login/Register {% endcomment %}
-        <div class="navbar-nav">
-          <a class="nav-link" style="{% if request.resolver_match.url_name == 'register_user' %}border-bottom: 0.1rem solid black;{% endif %}"
-          aria-current="page" href="{% url 'register_user' %}">Register</a>
-          <a class="nav-link" style="{% if request.resolver_match.url_name == 'login_user' %}border-bottom: 0.1rem solid black;{% endif %}"
-          aria-current="page" href="{% url 'login_user' %}">Login</a>
-        </div>
-      </div>
-      
 
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        
+        {% if user.is_authenticated %}
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" 
+              style="{% if request.resolver_match.url_name == 'dashboard' %}border-bottom: 0.1rem solid black;{% endif %}"
+              aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
+              style="{% if request.resolver_match.url_name == 'products' %}border-bottom: 0.1rem solid black;{% endif %}"
+              aria-current="page" href="{% url 'products' %}">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.resolver_match.url_name == 'customers' %}active{% endif %}"
+              style="{% if request.resolver_match.url_name == 'customers' %}border-bottom: 0.1rem solid black;{% endif %}"
+              aria-current="page" href="{% url 'customers' %}">Customers</a>
+            </li>
+        </ul>
+        {% endif %}
+
+        {% comment %} Login/Register {% endcomment %}
+        
+        {% if user.is_authenticated %}
+          <div class="navbar-nav">
+            <a class="nav-link" style=""
+            aria-current="page" href="{% url 'logout_user' %}">Log Out</a>
+          </div>
+        {% else %}
+          <div class="navbar-nav">
+            <a class="nav-link" style="{% if request.resolver_match.url_name == 'register_user' %}border-bottom: 0.1rem solid black;{% endif %}"
+            aria-current="page" href="{% url 'register_user' %}">Register</a>
+            <a class="nav-link" style="{% if request.resolver_match.url_name == 'login_user' %}border-bottom: 0.1rem solid black;{% endif %}"
+            aria-current="page" href="{% url 'login_user' %}">Log In</a>
+          </div>
+        {% endif %}
+
+      </div>
+    
 
     </div>
   </nav>
