@@ -6,7 +6,7 @@
       {% if messages.tags == info %}
         {% autoescape off %}
           <script>
-            alert("{{ message }}")
+            alert("{{ message|safe }}")
           </script>
         {% endautoescape %}
       {% endif %}
