@@ -163,6 +163,10 @@ def update_order_p(request, id):
 
 # REGISTER/LOGIN
 def register_user(request):
+    
+    if request.user.is_authenticated:
+        messages.info(request, "Log out first if you'd to register a new user") 
+        return redirect('dashboard')
 
     form = RegisterUserForm
     

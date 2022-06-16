@@ -1,7 +1,20 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
 
+  {% if messages %}
+    {% for message in messages %}
+      {% if messages.tags == info %}
+        {% autoescape off %}
+          <script>
+            alert("{{ message }}")
+          </script>
+        {% endautoescape %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
 <div class="container p-3 border">
+  
   <h2>DASHBOARD</h2>
   <br>
 
