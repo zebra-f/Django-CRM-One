@@ -204,7 +204,6 @@ def login_user(request):
             login(request, form.user_cache)
             return redirect('dashboard')
             
-
         else:
             pass
             # print(form.errors)
@@ -221,4 +220,19 @@ def logout_user(request):
     logout(request)
 
     return redirect('home')
+
+
+def user(request):
+    
+    if request.user.is_authenticated:
+        user_greeting = f"Hello {request.user.email}"
+    
+    else:
+        user_greeting = "Hello whoever you are"
+
+    context = {
+        'user_greeting': user_greeting
+    }
+
+    return render(request, 'accounts/user.html', context=context)
 
