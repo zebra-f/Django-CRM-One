@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Product, Order, Customer
 from .forms import OrderForm, RegisterUserForm, LoginUserForm
 from .filters import OrderFilter
+from . import decorators
 
 # Create your views here.
 
@@ -188,6 +189,7 @@ def register_user(request):
     return render(request, 'accounts/register_form.html', context=context)
 
 
+@decorators.authenticated_user
 def login_user(request):
     form = LoginUserForm
 
