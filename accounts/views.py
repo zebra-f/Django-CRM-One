@@ -163,11 +163,13 @@ def update_order_p(request, id):
 
 
 # REGISTER/LOGIN
+@decorators.authenticated_user
 def register_user(request):
     
-    if request.user.is_authenticated:
-        messages.info(request, "Log out first if you'd to register a new user") 
-        return redirect('dashboard')
+    # # moved to decorators.authenticated_user
+    # if request.user.is_authenticated:
+    #     messages.info(request, "Log out first if you'd to register a new user") 
+    #     return redirect('dashboard')
 
     form = RegisterUserForm
     
