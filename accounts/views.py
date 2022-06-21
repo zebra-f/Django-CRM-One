@@ -12,12 +12,12 @@ from . import decorators
 
 # Create your views here.
 
+@decorators.allowed_users(allowed_roles=['admin', 'customer'])
 def home(request):
 
     return render(request, 'accounts/home.html')
 
 
-# Dashboard
 @login_required(login_url='login_user')
 def dashboard(request):
 
