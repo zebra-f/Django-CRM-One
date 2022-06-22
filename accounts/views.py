@@ -4,6 +4,7 @@ from django.contrib import messages
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 
 from .models import Product, Order, Customer
 from .forms import OrderForm, RegisterUserForm, LoginUserForm
@@ -12,13 +13,13 @@ from . import decorators
 
 # Create your views here.
 
-@decorators.allowed_users(allowed_roles=['admin', 'customer'])
 def home(request):
 
     return render(request, 'accounts/home.html')
 
 
 @login_required(login_url='login_user')
+@decorators.allowed_users(allowed_roles=['admin'])
 def dashboard(request):
 
     if request.method == "POST":
@@ -44,6 +45,7 @@ def dashboard(request):
 
 
 @login_required(login_url='login_user')
+@decorators.allowed_users(allowed_roles=['admin'])
 def products(request):
     products = Product.objects.all()
     
@@ -55,6 +57,7 @@ def products(request):
 
 
 @login_required(login_url='login_user')
+@decorators.allowed_users(allowed_roles=['admin'])
 def customers(request):
     customers = Customer.objects.all()
     context = {
@@ -65,6 +68,7 @@ def customers(request):
 
 
 @login_required(login_url='login_user')
+@decorators.allowed_users(allowed_roles=['admin'])
 def customer(request, id):
     
     if request.method == "POST":
@@ -97,6 +101,7 @@ def customer(request, id):
 
 # ORDER_FORM.HTML
 @login_required(login_url='login_user')
+@decorators.allowed_users(allowed_roles=['admin'])
 def create_order(request):
     
     form = OrderForm()
@@ -117,6 +122,7 @@ def create_order(request):
 
 
 @login_required(login_url='login_user')
+@decorators.allowed_users(allowed_roles=['admin'])
 def create_order_p(request, id):
     ''' id: cusotomer id
     '''
@@ -142,6 +148,7 @@ def create_order_p(request, id):
 
 # ORDER_FORM.HTML
 @login_required(login_url='login_user')
+@decorators.allowed_users(allowed_roles=['admin'])
 def update_order_p(request, id):
     ''' id: order id
     '''
@@ -177,8 +184,15 @@ def register_user(request):
         form = RegisterUserForm(request.POST)
         
         if form.is_valid():
-            form.save()
+            user = form.save()
             
+            try:
+                group = Group.objects.get(name='customer')
+            except:
+                pass
+            else:
+                user.groups.add(group)
+
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account {username} was successfully createad.')
 
@@ -207,7 +221,6 @@ def login_user(request):
 
             login(request, form.user_cache)
             return redirect('dashboard')
-            
         else:
             pass
             # print(form.errors)
@@ -225,12 +238,11 @@ def logout_user(request):
 
     return redirect('home')
 
-
+@decorators.allowed_users(allowed_roles=['admin', 'customer'])
 def user(request):
     
     if request.user.is_authenticated:
         user_greeting = f"Hello {request.user.email}"
-    
     else:
         user_greeting = "Hello whoever you are"
 
